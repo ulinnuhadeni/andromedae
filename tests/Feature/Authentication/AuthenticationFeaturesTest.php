@@ -89,13 +89,10 @@ class AuthenticationFeaturesTest extends TestCase
     {
         $payloads = $this->payloads;
         $payloads['email'] = 'tester-email@mailinator.com';
-        $payloads['password'] = 'tester1234';
 
-        $loginService = $this->mockPostRequest($this->routes['login'], $payloads);
+        $this->mockLoggedInUser($payloads['email']);
 
-        $service = $this->mockGetRequest($this->routes['current-user'], [
-            'Authorization' => 'Bearer '.$loginService->json()['access_token'],
-        ]);
+        $service = $this->mockGetRequest($this->routes['current-user']);
 
         $response = $service->json();
 
@@ -106,22 +103,28 @@ class AuthenticationFeaturesTest extends TestCase
         $this->assertEquals('Successfully Retrieved Data', $response['message']);
     }
 
+    public function test_unathenticated_user_can_not_get_current_user_data(): void
+    {
+        $service = $this->mockGetRequest($this->routes['current-user']);
+
+        $response = $service->json();
+
+        $service->assertStatus(401);
+        $this->assertEquals(false, $response['success']);
+        $this->assertEquals('Unauthorized Access', $response['errors']);
+    }
+
     public function test_user_can_logout(): void
     {
         $payloads = $this->payloads;
         $payloads['email'] = 'tester-email@mailinator.com';
-        $payloads['password'] = 'tester1234';
 
-        $loginService = $this->mockPostRequest($this->routes['login'], $payloads);
+        $this->mockLoggedInUser($payloads['email']);
 
-        $service = $this->mockGetRequest($this->routes['logout'], [
-            'Authorization' => 'Bearer '.$loginService->json()['access_token'],
-        ]);
-
+        $service = $this->mockGetRequest($this->routes['logout']);
         $response = $service->json();
 
         $service->assertStatus(200);
-
         $this->assertEquals(true, $response['success']);
         $this->assertEquals('Successfully logged out', $response['message']);
     }

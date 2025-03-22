@@ -4,7 +4,7 @@ namespace App\Traits;
 
 trait ResponseTrait
 {
-    public function successResponse(string $message, int $code, ?array $data = null)
+    public function successResponse(string $message, int $code, $data = null)
     {
         $response = [
             'success' => true,

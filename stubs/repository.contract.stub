@@ -1,0 +1,10 @@
+<?php
+
+namespace {{ namespace }};
+
+use App\Http\Repositories\Contracts\BaseRepositoryContract as Base;
+
+interface {{ className }}Contract extends Base
+{
+    //
+}
