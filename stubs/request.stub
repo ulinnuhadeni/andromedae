@@ -1,0 +1,15 @@
+<?php
+
+namespace {{ namespace }};
+
+use App\Http\Requests\BaseRequestValidation;
+
+class {{ class }} extends BaseRequestValidation
+{
+    public function rules(): array
+    {
+        return [
+            //
+        ];
+    }
+}

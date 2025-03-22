@@ -1,0 +1,17 @@
+<?php
+
+namespace {{ namespace }};
+
+use App\Http\Repositories\BaseRepository as Base;
+use {{ contractNamespace }}\{{ contractClassName }} as BaseContract;
+
+class {{ className }} extends Base implements BaseContract
+{
+    protected $model;
+
+    public function __construct($model)
+    {
+        parent::__construct($model);
+        $this->model = $model;
+    }
+}
