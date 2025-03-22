@@ -3,12 +3,9 @@
 namespace Tests\Feature\Task;
 
 use App\Models\Task\Task;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\Feature\Task\BaseFeatureTest;
 
 class GetAndFindTaskFeaturesTest extends BaseFeatureTest
 {
-
     public function test_authenticated_user_can_get_all_tasks(): void
     {
         $service = $this->mockGetRequest($this->routes['get-tasks']);

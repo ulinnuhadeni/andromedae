@@ -15,7 +15,7 @@ class BaseFeatureTest extends TestCase
         'delete-task' => 'api.task.destroy',
     ];
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
